@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b5da6d439f4b43899675a8d4916fd919" Name="Diagram1">
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.Address" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.CaseDocument" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.CaseNote" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.CaseParty" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.Case" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.Email" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.ReferralSource" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SLS_LegalServicesModel.Telephone" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_Addresses_Cases" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_CaseParties_Addresses" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_CaseDocuments_Cases" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_CaseNotes_Cases" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_CaseParties_Cases" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_CaseParties_Emails" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_CaseParties_Telephones" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_Emails_Cases" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.FK_Telephones_Cases" ManuallyRouted="false" />
+        <AssociationConnector Association="SLS_LegalServicesModel.CaseReferralSources" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

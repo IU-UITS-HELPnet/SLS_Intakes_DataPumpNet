@@ -1,0 +1,759 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SLS_LegalServicesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CaseId" Type="int" />
+          <Property Name="Address1" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Address2" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CaseDocuments">
+          <Key>
+            <PropertyRef Name="CaseDocumentId" />
+          </Key>
+          <Property Name="CaseDocumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="Filename" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedById" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsWorldox" Type="bit" Nullable="false" />
+          <Property Name="FileType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CaseNotes">
+          <Key>
+            <PropertyRef Name="CaseNoteId" />
+          </Key>
+          <Property Name="CaseNoteId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Detail" Type="varchar(max)" Nullable="false" />
+          <Property Name="CreatedById" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsCriticalDate" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CaseParties">
+          <Key>
+            <PropertyRef Name="CasePartyId" />
+          </Key>
+          <Property Name="CasePartyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+          <Property Name="PartyType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="OrganizationName" Type="varchar" MaxLength="255" />
+          <Property Name="AddressId" Type="int" />
+          <Property Name="EmailId" Type="int" />
+          <Property Name="IsIUStudent" Type="bit" />
+          <Property Name="TelephoneId" Type="int" />
+        </EntityType>
+        <EntityType Name="CaseReferralSources">
+          <Key>
+            <PropertyRef Name="ReferralSourceId" />
+            <PropertyRef Name="CaseId" />
+          </Key>
+          <Property Name="ReferralSourceId" Type="int" Nullable="false" />
+          <Property Name="CaseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cases">
+          <Key>
+            <PropertyRef Name="CaseId" />
+          </Key>
+          <Property Name="CaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CaseNo" Type="varchar" MaxLength="50" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedById" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MayWeRecordYourInterview" Type="bit" Nullable="false" />
+          <Property Name="Narrative" Type="varchar(max)" />
+          <Property Name="FirstName" Type="varchar" MaxLength="255" />
+          <Property Name="LastName" Type="varchar" MaxLength="255" />
+          <Property Name="OrganizationName" Type="varchar" MaxLength="255" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="AcademicStatus" Type="varchar" MaxLength="50" />
+          <Property Name="SocialStatus" Type="varchar" MaxLength="50" />
+          <Property Name="CitizenshipStatus" Type="varchar" MaxLength="50" />
+          <Property Name="IUStudentId" Type="varchar" MaxLength="50" />
+          <Property Name="EnrollmentVerified" Type="bit" Nullable="false" />
+          <Property Name="StudentActivityFeeVerified" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Emails">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CaseId" Type="int" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReferralSources">
+          <Key>
+            <PropertyRef Name="ReferralSourceId" />
+          </Key>
+          <Property Name="ReferralSourceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReferralSource" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telephones">
+          <Key>
+            <PropertyRef Name="TelephoneId" />
+          </Key>
+          <Property Name="TelephoneId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CaseId" Type="int" />
+          <Property Name="Number" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Addresses_Cases">
+          <End Role="Cases" Type="Self.Cases" Multiplicity="0..1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseDocuments_Cases">
+          <End Role="Cases" Type="Self.Cases" Multiplicity="1" />
+          <End Role="CaseDocuments" Type="Self.CaseDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="CaseDocuments">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseNotes_Cases">
+          <End Role="Cases" Type="Self.Cases" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseNotes" Type="Self.CaseNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="CaseNotes">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Addresses">
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Cases">
+          <End Role="Cases" Type="Self.Cases" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Emails">
+          <End Role="Emails" Type="Self.Emails" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emails">
+              <PropertyRef Name="EmailId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="EmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Telephones">
+          <End Role="Telephones" Type="Self.Telephones" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telephones">
+              <PropertyRef Name="TelephoneId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="TelephoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseReferralSources_Cases1">
+          <End Role="Cases" Type="Self.Cases" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseReferralSources" Type="Self.CaseReferralSources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="CaseReferralSources">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseReferralSources_ReferralSources">
+          <End Role="ReferralSources" Type="Self.ReferralSources" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseReferralSources" Type="Self.CaseReferralSources" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReferralSources">
+              <PropertyRef Name="ReferralSourceId" />
+            </Principal>
+            <Dependent Role="CaseReferralSources">
+              <PropertyRef Name="ReferralSourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emails_Cases">
+          <End Role="Cases" Type="Self.Cases" Multiplicity="0..1" />
+          <End Role="Emails" Type="Self.Emails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="Emails">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telephones_Cases">
+          <End Role="Cases" Type="Self.Cases" Multiplicity="0..1" />
+          <End Role="Telephones" Type="Self.Telephones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="Telephones">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SLS_LegalServicesModelStoreContainer">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CaseDocuments" EntityType="Self.CaseDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CaseNotes" EntityType="Self.CaseNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CaseParties" EntityType="Self.CaseParties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CaseReferralSources" EntityType="Self.CaseReferralSources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cases" EntityType="Self.Cases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Emails" EntityType="Self.Emails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReferralSources" EntityType="Self.ReferralSources" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telephones" EntityType="Self.Telephones" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Addresses_Cases" Association="Self.FK_Addresses_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseDocuments_Cases" Association="Self.FK_CaseDocuments_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="CaseDocuments" EntitySet="CaseDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseNotes_Cases" Association="Self.FK_CaseNotes_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="CaseNotes" EntitySet="CaseNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Addresses" Association="Self.FK_CaseParties_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Cases" Association="Self.FK_CaseParties_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Emails" Association="Self.FK_CaseParties_Emails">
+            <End Role="Emails" EntitySet="Emails" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Telephones" Association="Self.FK_CaseParties_Telephones">
+            <End Role="Telephones" EntitySet="Telephones" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseReferralSources_Cases1" Association="Self.FK_CaseReferralSources_Cases1">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="CaseReferralSources" EntitySet="CaseReferralSources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseReferralSources_ReferralSources" Association="Self.FK_CaseReferralSources_ReferralSources">
+            <End Role="ReferralSources" EntitySet="ReferralSources" />
+            <End Role="CaseReferralSources" EntitySet="CaseReferralSources" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emails_Cases" Association="Self.FK_Emails_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="Emails" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telephones_Cases" Association="Self.FK_Telephones_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="Telephones" EntitySet="Telephones" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SLS_LegalServicesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CaseId" Type="Int32" />
+          <Property Name="Address1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Case" Relationship="Self.FK_Addresses_Cases" FromRole="Addresses" ToRole="Cases" />
+          <NavigationProperty Name="CaseParties" Relationship="Self.FK_CaseParties_Addresses" FromRole="Addresses" ToRole="CaseParties" />
+        </EntityType>
+        <EntityType Name="CaseDocument">
+          <Key>
+            <PropertyRef Name="CaseDocumentId" />
+          </Key>
+          <Property Name="CaseDocumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="Filename" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedById" Type="Guid" Nullable="false" />
+          <Property Name="IsWorldox" Type="Boolean" Nullable="false" />
+          <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Case" Relationship="Self.FK_CaseDocuments_Cases" FromRole="CaseDocuments" ToRole="Cases" />
+        </EntityType>
+        <EntityType Name="CaseNote">
+          <Key>
+            <PropertyRef Name="CaseNoteId" />
+          </Key>
+          <Property Name="CaseNoteId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedById" Type="Guid" Nullable="false" />
+          <Property Name="IsCriticalDate" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Case" Relationship="Self.FK_CaseNotes_Cases" FromRole="CaseNotes" ToRole="Cases" />
+        </EntityType>
+        <EntityType Name="CaseParty">
+          <Key>
+            <PropertyRef Name="CasePartyId" />
+          </Key>
+          <Property Name="CasePartyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseId" Type="Int32" Nullable="false" />
+          <Property Name="PartyType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="AddressId" Type="Int32" />
+          <Property Name="EmailId" Type="Int32" />
+          <Property Name="IsIUStudent" Type="Boolean" />
+          <Property Name="TelephoneId" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_CaseParties_Addresses" FromRole="CaseParties" ToRole="Addresses" />
+          <NavigationProperty Name="Case" Relationship="Self.FK_CaseParties_Cases" FromRole="CaseParties" ToRole="Cases" />
+          <NavigationProperty Name="Email" Relationship="Self.FK_CaseParties_Emails" FromRole="CaseParties" ToRole="Emails" />
+          <NavigationProperty Name="Telephone" Relationship="Self.FK_CaseParties_Telephones" FromRole="CaseParties" ToRole="Telephones" />
+        </EntityType>
+        <EntityType Name="Case">
+          <Key>
+            <PropertyRef Name="CaseId" />
+          </Key>
+          <Property Name="CaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CaseNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedById" Type="Guid" Nullable="false" />
+          <Property Name="MayWeRecordYourInterview" Type="Boolean" Nullable="false" />
+          <Property Name="Narrative" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AcademicStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SocialStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CitizenshipStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IUStudentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EnrollmentVerified" Type="Boolean" Nullable="false" />
+          <Property Name="StudentActivityFeeVerified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK_Addresses_Cases" FromRole="Cases" ToRole="Addresses" />
+          <NavigationProperty Name="CaseDocuments" Relationship="Self.FK_CaseDocuments_Cases" FromRole="Cases" ToRole="CaseDocuments" />
+          <NavigationProperty Name="CaseNotes" Relationship="Self.FK_CaseNotes_Cases" FromRole="Cases" ToRole="CaseNotes" />
+          <NavigationProperty Name="CaseParties" Relationship="Self.FK_CaseParties_Cases" FromRole="Cases" ToRole="CaseParties" />
+          <NavigationProperty Name="Emails" Relationship="Self.FK_Emails_Cases" FromRole="Cases" ToRole="Emails" />
+          <NavigationProperty Name="Telephones" Relationship="Self.FK_Telephones_Cases" FromRole="Cases" ToRole="Telephones" />
+          <NavigationProperty Name="ReferralSources" Relationship="Self.CaseReferralSources" FromRole="Cases" ToRole="ReferralSources" />
+        </EntityType>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailId" />
+          </Key>
+          <Property Name="EmailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CaseId" Type="Int32" />
+          <Property Name="Email1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CaseParties" Relationship="Self.FK_CaseParties_Emails" FromRole="Emails" ToRole="CaseParties" />
+          <NavigationProperty Name="Case" Relationship="Self.FK_Emails_Cases" FromRole="Emails" ToRole="Cases" />
+        </EntityType>
+        <EntityType Name="ReferralSource">
+          <Key>
+            <PropertyRef Name="ReferralSourceId" />
+          </Key>
+          <Property Name="ReferralSourceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReferralSource1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cases" Relationship="Self.CaseReferralSources" FromRole="ReferralSources" ToRole="Cases" />
+        </EntityType>
+        <EntityType Name="Telephone">
+          <Key>
+            <PropertyRef Name="TelephoneId" />
+          </Key>
+          <Property Name="TelephoneId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CaseId" Type="Int32" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CaseParties" Relationship="Self.FK_CaseParties_Telephones" FromRole="Telephones" ToRole="CaseParties" />
+          <NavigationProperty Name="Case" Relationship="Self.FK_Telephones_Cases" FromRole="Telephones" ToRole="Cases" />
+        </EntityType>
+        <Association Name="FK_Addresses_Cases">
+          <End Role="Cases" Type="Self.Case" Multiplicity="0..1" />
+          <End Role="Addresses" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Addresses">
+          <End Role="Addresses" Type="Self.Address" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Addresses">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseDocuments_Cases">
+          <End Role="Cases" Type="Self.Case" Multiplicity="1" />
+          <End Role="CaseDocuments" Type="Self.CaseDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="CaseDocuments">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseNotes_Cases">
+          <End Role="Cases" Type="Self.Case" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseNotes" Type="Self.CaseNote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="CaseNotes">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Cases">
+          <End Role="Cases" Type="Self.Case" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Emails">
+          <End Role="Emails" Type="Self.Email" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emails">
+              <PropertyRef Name="EmailId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="EmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CaseParties_Telephones">
+          <End Role="Telephones" Type="Self.Telephone" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CaseParties" Type="Self.CaseParty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Telephones">
+              <PropertyRef Name="TelephoneId" />
+            </Principal>
+            <Dependent Role="CaseParties">
+              <PropertyRef Name="TelephoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emails_Cases">
+          <End Role="Cases" Type="Self.Case" Multiplicity="0..1" />
+          <End Role="Emails" Type="Self.Email" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="Emails">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Telephones_Cases">
+          <End Role="Cases" Type="Self.Case" Multiplicity="0..1" />
+          <End Role="Telephones" Type="Self.Telephone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cases">
+              <PropertyRef Name="CaseId" />
+            </Principal>
+            <Dependent Role="Telephones">
+              <PropertyRef Name="CaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CaseReferralSources">
+          <End Role="Cases" Type="Self.Case" Multiplicity="*" />
+          <End Role="ReferralSources" Type="Self.ReferralSource" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SLS_LegalServicesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="CaseDocuments" EntityType="Self.CaseDocument" />
+          <EntitySet Name="CaseNotes" EntityType="Self.CaseNote" />
+          <EntitySet Name="CaseParties" EntityType="Self.CaseParty" />
+          <EntitySet Name="Cases" EntityType="Self.Case" />
+          <EntitySet Name="Emails" EntityType="Self.Email" />
+          <EntitySet Name="ReferralSources" EntityType="Self.ReferralSource" />
+          <EntitySet Name="Telephones" EntityType="Self.Telephone" />
+          <AssociationSet Name="FK_Addresses_Cases" Association="Self.FK_Addresses_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Addresses" Association="Self.FK_CaseParties_Addresses">
+            <End Role="Addresses" EntitySet="Addresses" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseDocuments_Cases" Association="Self.FK_CaseDocuments_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="CaseDocuments" EntitySet="CaseDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseNotes_Cases" Association="Self.FK_CaseNotes_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="CaseNotes" EntitySet="CaseNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Cases" Association="Self.FK_CaseParties_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Emails" Association="Self.FK_CaseParties_Emails">
+            <End Role="Emails" EntitySet="Emails" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CaseParties_Telephones" Association="Self.FK_CaseParties_Telephones">
+            <End Role="Telephones" EntitySet="Telephones" />
+            <End Role="CaseParties" EntitySet="CaseParties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emails_Cases" Association="Self.FK_Emails_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="Emails" EntitySet="Emails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Telephones_Cases" Association="Self.FK_Telephones_Cases">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="Telephones" EntitySet="Telephones" />
+          </AssociationSet>
+          <AssociationSet Name="CaseReferralSources" Association="Self.CaseReferralSources">
+            <End Role="Cases" EntitySet="Cases" />
+            <End Role="ReferralSources" EntitySet="ReferralSources" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SLS_LegalServicesModelStoreContainer" CdmEntityContainer="SLS_LegalServicesEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.Address">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CaseDocuments">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.CaseDocument">
+              <MappingFragment StoreEntitySet="CaseDocuments">
+                <ScalarProperty Name="CaseDocumentId" ColumnName="CaseDocumentId" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="IsWorldox" ColumnName="IsWorldox" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CaseNotes">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.CaseNote">
+              <MappingFragment StoreEntitySet="CaseNotes">
+                <ScalarProperty Name="CaseNoteId" ColumnName="CaseNoteId" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="IsCriticalDate" ColumnName="IsCriticalDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CaseParties">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.CaseParty">
+              <MappingFragment StoreEntitySet="CaseParties">
+                <ScalarProperty Name="CasePartyId" ColumnName="CasePartyId" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="PartyType" ColumnName="PartyType" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="IsIUStudent" ColumnName="IsIUStudent" />
+                <ScalarProperty Name="TelephoneId" ColumnName="TelephoneId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cases">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.Case">
+              <MappingFragment StoreEntitySet="Cases">
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="CaseNo" ColumnName="CaseNo" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="CreatedById" ColumnName="CreatedById" />
+                <ScalarProperty Name="MayWeRecordYourInterview" ColumnName="MayWeRecordYourInterview" />
+                <ScalarProperty Name="Narrative" ColumnName="Narrative" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="AcademicStatus" ColumnName="AcademicStatus" />
+                <ScalarProperty Name="SocialStatus" ColumnName="SocialStatus" />
+                <ScalarProperty Name="CitizenshipStatus" ColumnName="CitizenshipStatus" />
+                <ScalarProperty Name="IUStudentId" ColumnName="IUStudentId" />
+                <ScalarProperty Name="EnrollmentVerified" ColumnName="EnrollmentVerified" />
+                <ScalarProperty Name="StudentActivityFeeVerified" ColumnName="StudentActivityFeeVerified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.Email">
+              <MappingFragment StoreEntitySet="Emails">
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="Email1" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReferralSources">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.ReferralSource">
+              <MappingFragment StoreEntitySet="ReferralSources">
+                <ScalarProperty Name="ReferralSourceId" ColumnName="ReferralSourceId" />
+                <ScalarProperty Name="ReferralSource1" ColumnName="ReferralSource" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telephones">
+            <EntityTypeMapping TypeName="SLS_LegalServicesModel.Telephone">
+              <MappingFragment StoreEntitySet="Telephones">
+                <ScalarProperty Name="TelephoneId" ColumnName="TelephoneId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CaseReferralSources" TypeName="SLS_LegalServicesModel.CaseReferralSources" StoreEntitySet="CaseReferralSources">
+            <EndProperty Name="Cases">
+              <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+            </EndProperty>
+            <EndProperty Name="ReferralSources">
+              <ScalarProperty Name="ReferralSourceId" ColumnName="ReferralSourceId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
